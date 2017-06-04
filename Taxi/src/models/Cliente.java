@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 public class Cliente {
 	
 	protected int numeroCliente;
@@ -15,6 +17,10 @@ public class Cliente {
 		this.precioTotal = precioTotal;
 	}
 
+	public Cliente() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getNumeroCliente() {
 		return numeroCliente;
 	}
@@ -27,8 +33,8 @@ public class Cliente {
 		return fechaSubida;
 	}
 
-	public void setFechaSubida(String fechaSubida) {
-		this.fechaSubida = fechaSubida;
+	public void setFechaSubida(String date) {
+		this.fechaSubida = date;
 	}
 
 	public String getFechaBajada() {
@@ -45,6 +51,12 @@ public class Cliente {
 
 	public void setPrecioTotal(float precioTotal) {
 		this.precioTotal = precioTotal;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [numeroCliente=" + numeroCliente + ", fechaSubida=" + fechaSubida + ", fechaBajada="
+				+ fechaBajada + ", precioTotal=" + precioTotal + "]";
 	}
 	
 	

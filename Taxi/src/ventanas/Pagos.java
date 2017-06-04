@@ -10,6 +10,7 @@ import javax.swing.AbstractListModel;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
 
+import container.Listas;
 import models.*;
 
 import java.awt.Font;
@@ -38,6 +39,7 @@ public class Pagos {
 	private JList listaSuplementos;
 	private JLabel lblCambio;
 	private JLabel lblRecibo;
+	private int indiceClientes;
 	
 	// cambio y precios
 	private float bandera;
@@ -46,8 +48,7 @@ public class Pagos {
 	private float costeTrayecto;
 	private float dineroRecibido;
 	private float cambio;
-	
-	
+
 	// atribtos hora y tiempo
 	private long time_start;
 	private int hora;
@@ -145,40 +146,39 @@ public class Pagos {
 		reciboField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
-			
-							char caracter = e.getKeyChar();
-			                if (((caracter < '0') || (caracter > '9'))
-			                        && (caracter != '\b')) {
-			                	e.consume();
-			                }
-				
+
+				char caracter = e.getKeyChar();
+				if (((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+					e.consume();
+				}
+
 			}
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(!reciboField.getText().trim().equals("")){
-					cambio=0;
-					dineroRecibido=Float.parseFloat(reciboField.getText());
-					cambio=dineroRecibido-costeTrayecto;
+				if (!reciboField.getText().trim().equals("")) {
+					cambio = 0;
+					dineroRecibido = Float.parseFloat(reciboField.getText());
+					cambio = dineroRecibido - costeTrayecto;
 
-					if (dineroRecibido > costeTrayecto  ) {
+					if (dineroRecibido > costeTrayecto) {
 						lblCambioFinal.setText("" + cambio);
-						lblRecibo.setText("Recibo: ");;
+						lblRecibo.setText("Recibo: ");
+						;
 
-					btnFinalizar.setEnabled(true);
-						
+						btnFinalizar.setEnabled(true);
+
 					} else {
 						btnFinalizar.setEnabled(false);
 
 						lblRecibo.setText("[Error]:cantidad insuficiente o formato incorrecto.");
 					}
-				}
-				else{
+				} else {
 					btnFinalizar.setEnabled(false);
 
 					lblRecibo.setText("[Error]:cantidad insuficiente o formato incorrecto.");
 
 				}
-				
 
 			}
 		});
@@ -209,6 +209,25 @@ public class Pagos {
 		btnFinalizar.setBounds(310, 173, 114, 72);
 		framePagoYBajada.getContentPane().add(btnFinalizar);
 
+		
+		
+		
+		
+		
+//
+//				indiceClientes = 0;
+//				// Cliente c = Listas.listaClientes.get(indiceClientes);
+//				Cliente c = new Cliente();
+//				Listas.listaClientes.add(c);
+//		
+		
+		
+		
+		
+		
+		
+		
+		
 		start();
 		bajadaBandera();
 
@@ -216,20 +235,18 @@ public class Pagos {
 
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				Inicio ventanaInicio=new Inicio();
-				ventanaInicio.frameInicio.setVisible(true);
-				framePagoYBajada.dispose();
+
 				
 				
 			
+				
+				Inicio ventanaInicio = new Inicio();
+				ventanaInicio.frameInicio.setVisible(true);
+				framePagoYBajada.dispose();
+
 			}
 		});
 
-		
-		
-		
 	}
 
 	public void crono() {
@@ -307,6 +324,32 @@ public class Pagos {
 				btnFinTrayecto.setEnabled(false);
 				reciboField.setEnabled(true);
 
+				
+				Cliente c = new Cliente();
+		
+				
+				//Listas.listaClientes.add(c);
+				
+				
+				Listas.listaClientes.add(c);
+				int id;
+				id=Listas.listaClientes.size();
+				c.setNumeroCliente(id);
+				c.setPrecioTotal(costeTrayecto);
+				
+				c.setFechaBajada(lblContador.getText());
+				
+				System.out.println("");
+				for (Cliente c2: Listas.listaClientes){	
+					System.out.println(c.toString());
+				}
+			
+				
+				
+				
+				
+				
+				
 			}
 		});
 	}
@@ -335,7 +378,7 @@ public class Pagos {
 			precioMinuto = tiempoSegundos * precioPorMinuto;
 		}
 
-		if (diaSemana > 1 && diaSemana < 7) {
+		else {
 			precioPorMinuto = 0.18f;
 			precioMinuto = tiempoSegundos * precioPorMinuto;
 		}
