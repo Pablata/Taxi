@@ -331,7 +331,7 @@ public class Pagos {
 				//Listas.listaClientes.add(c);
 				
 				
-				Listas.listaClientes.add(c);
+				
 				int id;
 				id=Listas.listaClientes.size();
 				c.setNumeroCliente(id);
@@ -339,9 +339,11 @@ public class Pagos {
 				
 				c.setFechaBajada(lblContador.getText());
 				
+				Listas.listaClientes.add(c);
+				
 				System.out.println("");
 				for (Cliente c2: Listas.listaClientes){	
-					System.out.println(c.toString());
+					System.out.println(c2.toString());
 				}
 			
 				
